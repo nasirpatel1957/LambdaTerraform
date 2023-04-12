@@ -1,3 +1,5 @@
+Make another directory w/ name hello & put the function.js code inside it
+
 #Step1: Creating the AWS infrastructure & Lambda function using Terraform
 Files: 0-provider, 1-lambda-bucket & 2-hello-lambda are used to create the infrastructure
 
