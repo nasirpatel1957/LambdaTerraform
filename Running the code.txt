@@ -1,0 +1,8 @@
+#Step1: Creating the AWS infrastructure & Lambda function using Terraform
+Files: 0-provider, 1-lambda-bucket & 2-hello-lambda are used to create the infrastructure
+
+Run:
+terraform init
+terraform plan #(to see how it plans to execute the code & also to debug any errors)
+terraform apply #(you will be able to see S3 bucket, object, Cloudwatch group & AWS Lambda function)
+
