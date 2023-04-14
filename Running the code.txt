@@ -1,10 +1,21 @@
 Make another directory w/ name hello & put the function.js code inside it
 
-#Step1: Creating the AWS infrastructure & Lambda function using Terraform
+#STEP1: Creating the AWS infrastructure & Lambda function using Terraform
 Files: 0-provider, 1-lambda-bucket & 2-hello-lambda are used to create the infrastructure
 
 Run:
 terraform init
 terraform plan #(to see how it plans to execute the code & also to debug any errors)
-terraform apply #(you will be able to see S3 bucket, object, Cloudwatch group & AWS Lambda function)
+terraform apply --auto-approve #(you will be able to see S3 bucket, object, Cloudwatch group & AWS Lambda function)
 
+#to invoke the lambda function:
+aws lambda invoke --region=us-east-1 --function-name=hello response.json
+
+#to print response to see 'Hello World'
+cat response.json
+
+#STEP2: Create API gateway
+
+Run: 
+curl "https://<id>.execute-api.us-east-1.amazonaws.com/dev/hello?Name=Anton"
+curl -X POST -H "Content-Type: application/json" -d '{"name":"Anton"}' "https://<id>.execute-api.us-east-1.amazonaws.com/dev/hello"

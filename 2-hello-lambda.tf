@@ -20,24 +20,24 @@ POLICY
 
 #Attaching policies to the role (LambdaBasicExecutionRole)
 resource "aws_iam_role_policy_attachment" "hello_lambda_policy" {
-    role = aws_iam_role.hello_lambda_exec.id
-    policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  role       = aws_iam_role.hello_lambda_exec.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
+
 
 #Creating Lambda function
 resource "aws_lambda_function" "hello" {
-    function_name = "hello"
+  function_name = "hello"
 
-    s3_bucket = aws_s3_bucket.lambda_bucket.id
-    s3_key = aws_s3_object.lambda_hello.key
+  s3_bucket = aws_s3_bucket.lambda_bucket.id
+  s3_key    = aws_s3_object.lambda_hello.key
 
-    runtime = "nodejs16.x"
-    handler = "function.handler"  #(same as javascript filename)
+  runtime = "nodejs16.x"
+  handler = "function.handler"
 
-    #(source code is needed to redeploy the function if anything is changed)
-    source_code_hash = data.archive_file.lambda_hello.output_base64sha256 
+  source_code_hash = data.archive_file.lambda_hello.output_base64sha256
 
-    role = aws_iam_role.hello_lambda_exec.arn
+  role = aws_iam_role.hello_lambda_exec.arn
 }
 
 #Creating Cloudwatch log group (To store the logs)
